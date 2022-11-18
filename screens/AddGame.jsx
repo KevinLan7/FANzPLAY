@@ -1,0 +1,263 @@
+import { StatusBar } from 'expo-status-bar';
+import React, { useEffect, useState } from 'react';
+import { Image, StyleSheet, Text, View, Dimensions, Button, Modal, TouchableOpacity, KeyboardAvoidingView, TextInput, ScrollView } from 'react-native';
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Alert } from 'react-native'
+import * as firestore from "../firebase/firestore";
+import { queryQuestions } from '../firebase/firestore';
+import { async } from '@firebase/util';
+
+export default function App({ navigation, route }) {
+  const [AwayTeam, setAwayTeam] = useState("");
+  const [HomeTeam, setHomeTeam] = useState("");
+  const [JoinCode, setJoinCode] = useState("");
+  const [questions, setQuestions] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [list, setList] = useState([]);
+
+
+  const load = async () => {
+    let res = await queryQuestions();
+    console.log("res", res);
+
+    let list = res.docs.map((snapDoc) => {
+      let data = snapDoc.data();
+      data = { ...data, id: snapDoc.id };
+      return data;
+    });
+    console.log("list", list);
+    setList(list);
+  }
+
+
+
+  useEffect(() => {
+    (async () => {
+      load();
+    })()
+  }, []);
+  const submit = async () => {
+    if (AwayTeam == "") {
+      Alert.alert('Please Input AwayTeam!');
+      return;
+    }
+    if (HomeTeam == "") {
+      Alert.alert('Please Input HomeTeam!');
+      return;
+    }
+    if (JoinCode == "") {
+      Alert.alert('Please Input JoinCode!');
+      return;
+    }
+    if (!questions.length) {
+      Alert.alert('Please Select Questions!');
+      return;
+    }
+
+    let res = await firestore.addGames({
+      AwayTeam,
+      HomeTeam,
+      "Join Code": JoinCode,
+      questions
+    });
+    Alert.alert('Success!');
+    // navigation.replace("Teams");
+  }
+
+  const add = async (item) => {
+    questions.push(item);
+    setQuestions([...questions]);
+  }
+  return (
+    <View style={styles.container}>
+      <StatusBar
+        animated={false} //指定状态栏的变化是否应以动画形式呈现。目前支持这几种样式：backgroundColor, barStyle和hidden
+        hidden={false}  //是否隐藏状态栏。
+        networkActivityIndicatorVisible={false}//仅作用于ios。是否显示正在使用网络。
+        showHideTransition={'fade'}//仅作用于ios。显示或隐藏状态栏时所使用的动画效果（’fade’, ‘slide’）。
+        backgroundColor='rgba(255,255,255,0)'// {'transparent'} //状态栏的背景色
+        translucent={true}//指定状态栏是否透明。设置为true时，应用会在状态栏之下绘制（即所谓“沉浸式”——被状态栏遮住一部分）。常和带有半透明背景色的状态栏搭配使用。
+        barStyle={'light-content'} // enum('default', 'light-content', 'dark-content')
+      />
+      <ScrollView>
+        <KeyboardAvoidingView behavior="padding" enabled>
+
+          <View style={{ paddingTop: 30, paddingHorizontal: 20 }}>
+
+            <View style={{ backgroundColor: "#fff" }}>
+              <View style={styles.row}>
+                <Text style={styles.label}>AwayTeam</Text>
+                <TextInput style={styles.input} placeholder='Input AwayTeam' value={AwayTeam} onChangeText={(text) => {
+                  setAwayTeam(text);
+                }}></TextInput>
+              </View>
+              <View style={styles.row}>
+                <Text style={styles.label}>HomeTeam</Text>
+                <TextInput style={styles.input} placeholder='Input HomeTeam' value={HomeTeam} onChangeText={(text) => {
+                  setHomeTeam(text);
+                }}></TextInput>
+              </View>
+              <View style={styles.row}>
+                <Text style={styles.label}>Join Code</Text>
+                <TextInput style={styles.input} placeholder='Input Join Code' value={JoinCode} onChangeText={(text) => {
+                  setJoinCode(text);
+                }}></TextInput>
+              </View>
+
+              <View >
+                <Text style={styles.label}>Questions</Text>
+              </View>
+              {
+                questions.map((item, index) => {
+                  return <View key={item.id} style={{ backgroundColor: "#eee", padding: 10, margin: 10, borderRadius: 10 }}>
+                    <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+                      <Text style={{ fontSize: 15 }}>{item.question}</Text>
+                      <Text style={{ color: "#888", marginTop: 10, fontSize: 17, color: "#ff4544" }}>{item['duration']}s</Text>
+
+                    </View>
+                    <Text style={{ color: "#888", marginTop: 10 }}>Answer1:{item['answer1']}</Text>
+                    <Text style={{ color: "#888", marginTop: 10 }}>Answer2:{item['answer2']}</Text>
+                    <Text style={{ color: "#888", marginTop: 10 }}>Answer3:{item['answer3']}</Text>
+                    <Text style={{ color: "#888", marginTop: 10 }}>Answer4:{item['answer4']}</Text>
+                    <Text style={{ color: "#888", marginTop: 10, fontSize: 17, color: "#ff4544" }}>Correct answer:{item['correctanswer']}</Text>
+                    <Button title='Remove' onPress={() => {
+                      questions.splice(index, 1);
+                      setQuestions([...questions]);
+                    }}></Button>
+                  </View>
+                })
+              }
+              <View style={{ justifyContent: "center", alignItems: "center" }}>
+                <TouchableOpacity onPress={() => {
+                  setModalVisible(true);
+                }}>
+                  <View style={styles.addbutton}>
+                    <Text style={{ fontSize: 13, color: "#fff" }}>Add Question</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </KeyboardAvoidingView>
+      </ScrollView>
+      <View style={{ justifyContent: "center", alignItems: "center" }}>
+        <TouchableOpacity onPress={() => {
+          submit();
+        }}>
+          <View style={styles.button}>
+            <Text style={{ fontSize: 17, color: "#fff" }}>Save</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+      <Modal
+        animationType="slide"
+        presentationStyle={"fullScreen"}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        }}
+
+      >
+
+        <View style={{ backgroundColor: '#ffffff' }}>
+          <ScrollView>
+            <Button title='close' onPress={() => {
+              setModalVisible(false);
+            }}></Button>
+            <View style={styles.container}>
+
+              {
+                list.map((item) => {
+
+                  if (questions.find(it => it.id === item.id)) {
+                    return <></>
+                  }
+                  return <View style={{ backgroundColor: "#eee", padding: 10, margin: 10, borderRadius: 10 }}>
+                    <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+                      <Text style={{ fontSize: 15 }}>{item.question}</Text>
+                      <Text style={{ color: "#888", marginTop: 10, fontSize: 17, color: "#ff4544" }}>{item['duration']}s</Text>
+
+                    </View>
+                    <Text style={{ color: "#888", marginTop: 10 }}>Answer1:{item['answer1']}</Text>
+                    <Text style={{ color: "#888", marginTop: 10 }}>Answer2:{item['answer2']}</Text>
+                    <Text style={{ color: "#888", marginTop: 10 }}>Answer3:{item['answer3']}</Text>
+                    <Text style={{ color: "#888", marginTop: 10 }}>Answer4:{item['answer4']}</Text>
+                    <Text style={{ color: "#888", marginTop: 10, fontSize: 17, color: "#ff4544" }}>Correct answer:{item['correctanswer']}</Text>
+                    <Button title='Add' onPress={() => {
+                      add(item);
+                    }}></Button>
+                  </View>
+                })
+              }
+            </View>
+          </ScrollView>
+        </View>
+      </Modal>
+    </View >
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+  bgImage: {
+    width: windowWidth,
+    height: windowHeight + 50,
+    position: "absolute",
+    top: 0,
+    left: 0,
+    resizeMode: "stretch",
+    opacity: 0.6
+  },
+  headimg: {
+    marginTop: 20,
+    width: 80,
+    height: 80,
+    resizeMode: "stretch",
+  },
+  label: {
+    width: 80
+  },
+  row: {
+    display: "flex",
+    flexDirection: "row",
+    borderBottomColor: "#ddd",
+    borderBottomWidth: 1,
+    alignItems: "center"
+  },
+  input: {
+    height: 50,
+    borderRadius: 5,
+    color: "#333",
+    width: "100%",
+    paddingLeft: 10,
+  },
+  addbutton: {
+    marginTop: 40,
+    width: 100,
+    backgroundColor: "#5465ff",
+    textAlign: "center",
+    borderRadius: 10,
+    height: 30,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  button: {
+    marginTop: 40,
+    width: 300,
+    backgroundColor: "#546599",
+    textAlign: "center",
+    borderRadius: 10,
+    height: 45,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 10
+  }
+});

@@ -1,35 +1,17 @@
 import { View, StyleSheet } from 'react-native';
 import { GlobalColors } from '../constants/styles';
 import { useState, useEffect } from "react";
-// import { collection, onSnapshot } from 'firebase/firestore';
 import { queryExpense } from '../firebase/firestore';
 
 import React from 'react';
+import { Ionicons } from '@expo/vector-icons';
 
-function AllExpenses() {
+function Games() {
   const [expenses, setExpenses] = useState([]);
 
   useEffect(() => {
     load();
-    // const unsubscribe = onSnapshot(
-    //   collection(firestore, "expenses"),
-    //   (querySnapshot) => {
-    //     if (querySnapshot.empty) {
-    //       setExpenses([]);
-    //       return;
-    //     }
-    //     setExpenses(
-    //       querySnapshot.docs.map((snapDoc) => {
-    //         let data = snapDoc.data();
-    //         data = { ...data, key: snapDoc.id };
-    //         return data;
-    //       })
-    //     );
-    //   }
-    // );
-    // return () => {
-    //   unsubscribe();
-    // };
+
   }, []);
 
   const load = async () => {
@@ -47,7 +29,7 @@ function AllExpenses() {
 
   return (
     <View style={styles.container}>
-
+      Empty Data
     </View>
   );
 }
@@ -62,4 +44,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AllExpenses;
+export default Games;

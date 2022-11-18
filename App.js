@@ -6,9 +6,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { GlobalColors } from './constants/styles';
 import { Ionicons } from '@expo/vector-icons';
 import Questions from './screens/Questions';
+import AddQuestions from './screens/AddQuestions';
+
+import Games from './screens/Games';
+import Teams from './screens/Teams';
+import AddGame from './screens/AddGame';
+import AddTeam from './screens/AddTeam';
 
 import React from 'react';
-
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
@@ -46,7 +51,7 @@ function Overview() {
 
       <BottomTabs.Screen
         name="Games"
-        component={Questions}
+        component={Games}
         options={{
           title: 'Games',
           tabBarLabel: 'Games',
@@ -57,7 +62,7 @@ function Overview() {
       />
       <BottomTabs.Screen
         name="Teams"
-        component={Questions}
+        component={Teams}
         options={{
           title: 'Teams',
           tabBarLabel: 'Teams',
@@ -86,7 +91,21 @@ export default function App() {
             component={Overview}
             options={{ headerShown: false }}
           />
-
+          <Stack.Screen
+            name="AddGame"
+            component={AddGame}
+            options={{ headerShown: true }}
+          />
+          <Stack.Screen
+            name="AddTeam"
+            component={AddTeam}
+            options={{ headerShown: true }}
+          />
+          <Stack.Screen
+            name="AddQuestions"
+            component={AddQuestions}
+            options={{ headerShown: true }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>
