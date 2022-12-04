@@ -49,8 +49,6 @@ Currently, the Admin App is all built and implemented by Kaiwen. He finished set
 
 ### Run
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
 1. Clone the repo
    ```sh
    git clone https://github.com/KevinLan7/fanzplay.git
