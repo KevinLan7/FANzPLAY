@@ -16,6 +16,7 @@ function Questions({ navigation, route }) {
     load();
   }, []);
 
+  // load questions
   const load = async () => {
     let res = await queryQuestions();
     console.log("res", res);
@@ -30,23 +31,24 @@ function Questions({ navigation, route }) {
     setIsRefreshing(false);
   }
 
+  // remove question
   const remove = async (item) => {
     Alert.alert(
-      '', //提示标题
-      `Confirm delete？`, //提示内容
+      '',
+      `Confirm delete?`
       [
-        {
-          text: 'confirm', onPress: async () => {
-            let res = await deleteQuestions(item.id);
-            load()
-          }
-        },
-        {
-          text: 'cancel', onPress: () => {
-
-          }
+      {
+        text: 'confirm', onPress: async () => {
+          let res = await deleteQuestions(item.id);
+          load()
         }
-      ] //按钮集合
+      },
+      {
+        text: 'cancel', onPress: () => {
+
+        }
+      }
+      ]
     )
 
 

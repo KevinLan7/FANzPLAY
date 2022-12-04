@@ -16,6 +16,7 @@ function Games({ navigation, route }) {
     load();
   }, []);
 
+  // load game list
   const load = async () => {
     let res = await queryGames();
     console.log("res", res);
@@ -31,10 +32,11 @@ function Games({ navigation, route }) {
   }
 
 
+  // remove a game
   const remove = async (item) => {
     Alert.alert(
-      '', //提示标题
-      `Confirm delete？`, //提示内容
+      '',
+      `Confirm delete?`,
       [
         {
           text: 'confirm', onPress: async () => {
@@ -47,7 +49,7 @@ function Games({ navigation, route }) {
 
           }
         }
-      ] //按钮集合
+      ]
     )
   }
 

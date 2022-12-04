@@ -13,9 +13,11 @@ export default function App({ navigation, route }) {
 
   useEffect(() => {
     (async () => {
-      load();
+
     })()
   }, []);
+
+  // submit form
   const submit = async () => {
     if (name == "") {
       Alert.alert('Please Input Name!');
@@ -36,12 +38,12 @@ export default function App({ navigation, route }) {
   return (
     <View style={styles.container}>
       <StatusBar
-        animated={false} //指定状态栏的变化是否应以动画形式呈现。目前支持这几种样式：backgroundColor, barStyle和hidden
-        hidden={false}  //是否隐藏状态栏。
-        networkActivityIndicatorVisible={false}//仅作用于ios。是否显示正在使用网络。
-        showHideTransition={'fade'}//仅作用于ios。显示或隐藏状态栏时所使用的动画效果（’fade’, ‘slide’）。
-        backgroundColor='rgba(255,255,255,0)'// {'transparent'} //状态栏的背景色
-        translucent={true}//指定状态栏是否透明。设置为true时，应用会在状态栏之下绘制（即所谓“沉浸式”——被状态栏遮住一部分）。常和带有半透明背景色的状态栏搭配使用。
+        animated={false} //Specifies whether the changes in the status bar should be animated or not. These styles are currently supported: backgroundColor, barStyle and hidden.
+        hidden={false}  //Whether to hide the status bar.
+        networkActivityIndicatorVisible={false}//Only works for ios. Shows whether the network is in use or not.
+        showHideTransition={'fade'}//Only works on ios. The animation effects to use when showing or hiding the status bar ('fade', 'slide').
+        backgroundColor='rgba(255,255,255,0)'// {'transparent'} //The background color of the status bar.
+        translucent={true}//Specifies whether the status bar is transparent. When set to true, the application will draw under the status bar (so-called "immersive" - partially covered by the status bar). Often used with a status bar with a semi-transparent background color.
         barStyle={'light-content'} // enum('default', 'light-content', 'dark-content')
       />
       <KeyboardAvoidingView behavior="padding" enabled>

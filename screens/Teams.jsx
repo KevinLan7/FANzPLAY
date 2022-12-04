@@ -15,6 +15,7 @@ function Teams({ navigation, route }) {
     load();
   }, []);
 
+  // load data
   const load = async () => {
     let res = await queryTeams();
     console.log("res", res);
@@ -29,10 +30,11 @@ function Teams({ navigation, route }) {
     setIsRefreshing(false);
   }
 
+  // remove team
   const remove = async (item) => {
     Alert.alert(
-      '', //提示标题
-      `Confirm delete？`, //提示内容
+      '',
+      `Confirm delete?`,
       [
         {
           text: 'confirm', onPress: async () => {
@@ -45,7 +47,7 @@ function Teams({ navigation, route }) {
 
           }
         }
-      ] //按钮集合
+      ]
     )
   }
   return (
