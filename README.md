@@ -25,7 +25,7 @@
 
 FANzPLAY is a tournament interactive application that increases the interactivity and passion of the spectators. On game day, in addition to watching the game, spectators can represent their home team against opposing fans through FANzPLAY, for example during halftime or during a game stoppage. Participants must answer the questions on FANzPLAY within a limited time frame, and the results are then presented visually as a percentage through a specific algorithm. The winning fans will receive a gift from FANzPLAY sponsors. Keep shouting for the home team!
 
-We are the third team to take over FANzPLAY. This time, we split FANzPLAY into two Apps, one is FANzPLAY User (for users) and one is FANzPLAY Admin (for administrators). The repository you are currently in is the **FANzPLAY Admin App**.
+We are the third team to take over FANzPLAY. This time, we split FANzPLAY into two Apps, one is FANzPLAY User (for users) and one is FANzPLAY Admin (for administrators). **The repository you are currently in is the FANzPLAY Admin App**.
 
 Currently, the Admin App is all built and implemented by Kaiwen. He finished setting up the questions, setting up the matches, setting up the teams.
 
