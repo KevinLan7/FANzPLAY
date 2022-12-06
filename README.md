@@ -7,8 +7,6 @@ FANzPLAY is a tournament interactive application that increases the interactivit
 
 We are the third team to take over FANzPLAY. This time, we split FANzPLAY into two Apps, one is FANzPLAY User (for users) and one is FANzPLAY Admin (for administrators). **The repository you are currently in is the FANzPLAY Admin App**.
 
-Currently, the Admin App is all built and implemented by Kaiwen. He finished setting up the questions, setting up the matches, setting up the teams.
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
