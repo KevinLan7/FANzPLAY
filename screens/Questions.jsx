@@ -34,24 +34,22 @@ function Questions({ navigation, route }) {
   // remove question
   const remove = async (item) => {
     Alert.alert(
-      '',
-      `Confirm delete?`
+      'Delete',
+      `Confirm delete?`,
       [
-      {
-        text: 'confirm', onPress: async () => {
-          let res = await deleteQuestions(item.id);
-          load()
-        }
-      },
-      {
-        text: 'cancel', onPress: () => {
+        {
+          text: 'confirm', onPress: async () => {
+            let res = await deleteQuestions(item.id);
+            load()
+          }
+        },
+        {
+          text: 'cancel', onPress: () => {
 
+          }
         }
-      }
       ]
-    )
-
-
+    );
   }
 
   return (

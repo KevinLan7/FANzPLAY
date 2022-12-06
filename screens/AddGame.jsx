@@ -41,18 +41,23 @@ export default function App({ navigation, route }) {
 
   // submit a game
   const submit = async () => {
+    // if AwayTeam is empty show error msg
     if (AwayTeam == "") {
       Alert.alert('Please Input AwayTeam!');
       return;
     }
+
+    // if HomeTeam is empty show error msg
     if (HomeTeam == "") {
       Alert.alert('Please Input HomeTeam!');
       return;
     }
+    // if JoinCode is empty show error msg
     if (JoinCode == "") {
       Alert.alert('Please Input JoinCode!');
       return;
     }
+    // if Questions is empty show error msg
     if (!questions.length) {
       Alert.alert('Please Select Questions!');
       return;
@@ -209,64 +214,3 @@ export default function App({ navigation, route }) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  bgImage: {
-    width: windowWidth,
-    height: windowHeight + 50,
-    position: "absolute",
-    top: 0,
-    left: 0,
-    resizeMode: "stretch",
-    opacity: 0.6
-  },
-  headimg: {
-    marginTop: 20,
-    width: 80,
-    height: 80,
-    resizeMode: "stretch",
-  },
-  label: {
-    width: 80
-  },
-  row: {
-    display: "flex",
-    flexDirection: "row",
-    borderBottomColor: "#ddd",
-    borderBottomWidth: 1,
-    alignItems: "center"
-  },
-  input: {
-    height: 50,
-    borderRadius: 5,
-    color: "#333",
-    width: "100%",
-    paddingLeft: 10,
-  },
-  addbutton: {
-    marginTop: 40,
-    width: 100,
-    backgroundColor: "#5465ff",
-    textAlign: "center",
-    borderRadius: 10,
-    height: 30,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  button: {
-    marginTop: 40,
-    width: 300,
-    backgroundColor: "#546599",
-    textAlign: "center",
-    borderRadius: 10,
-    height: 45,
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 10
-  }
-});

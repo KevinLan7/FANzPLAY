@@ -19,21 +19,24 @@ export default function App({ navigation, route }) {
 
   // submit form
   const submit = async () => {
+    // if name is empty show error msg
     if (name == "") {
       Alert.alert('Please Input Name!');
       return;
     }
+
+    // if userCount is empty show error msg
     if (userCount == "") {
       Alert.alert('Please Input userCount!');
       return;
     }
 
+    // save
     let res = await firestore.addTeams({
       name,
       userCount
     });
     Alert.alert('Success!');
-    // navigation.replace("Teams");
   }
   return (
     <View style={styles.container}>

@@ -26,34 +26,42 @@ export default function AddQuestions({ navigation, route }) {
 
   // submit form 
   const submit = async () => {
+    // if Question is empty show error msg
     if (question == "") {
       Alert.alert('Please Input Question!');
       return;
     }
+    // if Answer1 is empty show error msg
     if (answer1 == "") {
       Alert.alert('Please Input Answer1!');
       return;
     }
+    // if Answer2 is empty show error msg
     if (answer2 == "") {
       Alert.alert('Please Input Answer2!');
       return;
     }
+    // if Answer3 is empty show error msg
     if (!answer3) {
       Alert.alert('Please Select Answer3!');
       return;
     }
+    // if Answer4 is empty show error msg
     if (!answer4) {
       Alert.alert('Please Select Answer4!');
       return;
     }
+    // if Question is empty show error msg
     if (!question) {
       Alert.alert('Please Select Question!');
       return;
     }
+    // if Correctanswer is empty show error msg
     if (!correctanswer) {
       Alert.alert('Please Select Correctanswer!');
       return;
     }
+    // if Duration is empty show error msg
     if (!duration) {
       Alert.alert('Please Select Duration!');
       return;
