@@ -77,7 +77,7 @@ function Teams({ navigation, route }) {
         </TouchableOpacity>
         {
           list.map((item) => {
-            return <View style={{ backgroundColor: "#eee", padding: 10, margin: 10, borderRadius: 10, flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+            return <View key={item.id} style={{ backgroundColor: "#eee", padding: 10, margin: 10, borderRadius: 10, flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
               <Text style={{ fontSize: 20 }}>{item.name}</Text>
               <Text style={{ marginLeft: 20, color: "#888" }}>UserCount:{item.userCount}</Text>
               <Button title='delete' onPress={() => {

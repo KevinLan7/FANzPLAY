@@ -189,7 +189,7 @@ export default function App({ navigation, route }) {
                   if (questions.find(it => it.id === item.id)) {
                     return <></>
                   }
-                  return <View style={{ backgroundColor: "#eee", padding: 10, margin: 10, borderRadius: 10 }}>
+                  return <View key={item.id} style={{ backgroundColor: "#eee", padding: 10, margin: 10, borderRadius: 10 }}>
                     <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                       <Text style={{ fontSize: 15 }}>{item.question}</Text>
                       <Text style={{ color: "#888", marginTop: 10, fontSize: 17, color: "#ff4544" }}>{item['duration']}s</Text>
@@ -214,3 +214,65 @@ export default function App({ navigation, route }) {
   );
 }
 
+
+const styles = StyleSheet.create({
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+  bgImage: {
+    width: windowWidth,
+    height: windowHeight + 50,
+    position: "absolute",
+    top: 0,
+    left: 0,
+    resizeMode: "stretch",
+    opacity: 0.6
+  },
+  headimg: {
+    marginTop: 20,
+    width: 80,
+    height: 80,
+    resizeMode: "stretch",
+  },
+  label: {
+    width: 80
+  },
+  row: {
+    display: "flex",
+    flexDirection: "row",
+    borderBottomColor: "#ddd",
+    borderBottomWidth: 1,
+    alignItems: "center"
+  },
+  input: {
+    height: 50,
+    borderRadius: 5,
+    color: "#333",
+    width: "100%",
+    paddingLeft: 10
+  },
+  button: {
+    marginTop: 40,
+    width: 300,
+    marginBottom: 20,
+    backgroundColor: "#546599",
+    textAlign: "center",
+    borderRadius: 10,
+    height: 45,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  addbutton: {
+    marginTop: 40,
+    width: 300,
+    backgroundColor: "#546599",
+    textAlign: "center",
+    borderRadius: 10,
+    height: 45,
+    alignItems: "center",
+    justifyContent: "center"
+  }
+});
