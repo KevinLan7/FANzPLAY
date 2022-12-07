@@ -35,9 +35,9 @@ We are the third team to take over FANzPLAY. This time, we split FANzPLAY into t
    ```sh
    npm install
    ```
-3. Download Expo’s command line interface
+3. Download Expo’s command line interface and run
    ```sh
-   npm install --global expo-cli
+   npm install --global expo-cli (if there are err mag, use: sudo npm install expo-cli -g --unsafe-perm)
    ```
    ```sh
    expo r -c
