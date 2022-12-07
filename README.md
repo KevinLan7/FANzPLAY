@@ -38,7 +38,7 @@ We are the third team to take over FANzPLAY. This time, we split FANzPLAY into t
 3. Download Expo’s command line interface and run
    ```sh
    npm install --global expo-cli
-   (if there are err mag, use: sudo npm install expo-cli -g --unsafe-perm)
+   (if there are error messages, use: sudo npm install expo-cli -g --unsafe-perm)
    ```
    ```sh
    expo r -c
